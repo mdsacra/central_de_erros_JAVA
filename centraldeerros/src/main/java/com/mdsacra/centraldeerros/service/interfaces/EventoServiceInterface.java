@@ -20,4 +20,6 @@ public interface EventoServiceInterface {
 
     List<Evento> findByData(String data);
 
+    Evento salvarEvento(Evento evento);
+
 }

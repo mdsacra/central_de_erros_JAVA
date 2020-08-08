@@ -29,8 +29,7 @@ public class Evento {
     String descricao;
 
     @Column
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    Date data;
+    String data;
 
     @Column
     Integer quantidade;

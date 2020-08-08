@@ -2,7 +2,7 @@ package com.mdsacra.centraldeerros.level;
 
 public enum Level {
 
-    ERR(1), WARN(2), INFO(3);
+    ERR(0), WARN(1), INFO(2);
 
     private Integer level;
 

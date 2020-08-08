@@ -17,6 +17,11 @@ public class EventoService implements EventoServiceInterface {
     EventoRepository eventoRepository;
 
     @Override
+    public Evento salvarEvento(Evento evento) {
+        return this.eventoRepository.save(evento);
+    }
+
+    @Override
     public Optional<Evento> findById(Integer id) {
         return eventoRepository.findById(id);
     }
