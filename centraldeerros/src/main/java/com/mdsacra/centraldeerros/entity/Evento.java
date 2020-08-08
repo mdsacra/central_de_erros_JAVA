@@ -11,7 +11,7 @@ import java.util.Date;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Data
-public class Erro {
+public class Evento {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
@@ -23,7 +23,7 @@ public class Erro {
     String origem;
 
     @Column(nullable = false, length = 100)
-    String logEvento;
+    String log;
 
     @Column(nullable = false)
     String descricao;
@@ -33,5 +33,6 @@ public class Erro {
     Date data;
 
     @Column
-    Integer qtdEvento;
+    Integer quantidade;
+
 }
