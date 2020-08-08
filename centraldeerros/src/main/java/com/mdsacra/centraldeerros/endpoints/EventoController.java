@@ -5,14 +5,12 @@ import com.mdsacra.centraldeerros.entity.Evento;
 import com.mdsacra.centraldeerros.level.Level;
 import com.mdsacra.centraldeerros.service.implement.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.web.config.SpringDataJacksonConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @RestController

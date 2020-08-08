@@ -29,7 +29,9 @@ public class Evento {
     String descricao;
 
     @Column
-    String data;
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    Date data;
 
     @Column
     Integer quantidade;
