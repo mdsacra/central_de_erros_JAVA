@@ -7,9 +7,12 @@ import com.mdsacra.centraldeerros.service.interfaces.EventoServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Service
 public class EventoService implements EventoServiceInterface {
@@ -22,6 +25,12 @@ public class EventoService implements EventoServiceInterface {
         return this.eventoRepository.save(evento);
     }
 
+    public List<Evento> findAll(){
+        List<Evento> eventos = new ArrayList<>();
+        eventoRepository.findAll().forEach(eventos::add);
+        return eventos;
+    }
+
     @Override
     public Optional<Evento> findById(Integer id) {
         return eventoRepository.findById(id);
@@ -29,26 +38,26 @@ public class EventoService implements EventoServiceInterface {
 
     @Override
     public List<Evento> findByLevel(Level level, Pageable pageable) {
-        return eventoRepository.findByLevel(level, pageable).getContent();
+        return eventoRepository.findByLevel(level, pageable);
     }
 
     @Override
     public List<Evento> findByOrigem(String origem, Pageable pageable) {
-        return eventoRepository.findByOrigem(origem, pageable).getContent();
+        return eventoRepository.findByOrigem(origem, pageable);
     }
 
     @Override
     public List<Evento> findByLog(String log, Pageable pageable) {
-        return eventoRepository.findByLog(log, pageable).getContent();
+        return eventoRepository.findByLog(log, pageable);
     }
 
     @Override
     public List<Evento> findByDescricao(String descricao, Pageable pageable) {
-        return eventoRepository.findByDescricaoContaining(descricao, pageable).getContent();
+        return eventoRepository.findByDescricaoContaining(descricao, pageable);
     }
 
     @Override
     public List<Evento> findByData(String data, Pageable pageable) {
-        return eventoRepository.findByData(data, pageable).getContent();
+        return eventoRepository.findByData(data, pageable);
     }
 }

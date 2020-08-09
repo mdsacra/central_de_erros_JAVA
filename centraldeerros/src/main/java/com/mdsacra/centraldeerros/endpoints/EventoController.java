@@ -33,13 +33,26 @@ public class EventoController {
     }
 
     @GetMapping
-    public ResponseEntity<Iterable<Evento>> findEventoByLevel(@RequestParam(name = "level") Level level, Pageable pageable) {
+    public ResponseEntity<?> findEventos(@RequestParam(name = "page", required = false) Pageable pageable,
+                                         @RequestParam(name = "level", required = false) Level level,
+                                         @RequestParam(name = "origem", required = false) String origem,
+                                         @RequestParam(name = "log", required = false) String log,
+                                         @RequestParam(name = "descricao", required = false) String descricao) {
 
-        if (eventoService.findByLevel(level, pageable).isEmpty()) {
+        if (eventoService.findAll().isEmpty()) {
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NO_CONTENT);
+        } else {
+            if (level != null) {
+                return new ResponseEntity<>(eventoService.findByLevel(level, pageable), HttpStatus.OK);
+            } else if (origem != null) {
+                return new ResponseEntity<>(eventoService.findByOrigem(origem, pageable), HttpStatus.OK);
+            } else if (log != null) {
+                return new ResponseEntity<>(eventoService.findByLog(log, pageable), HttpStatus.OK);
+            } else if (descricao != null) {
+                return new ResponseEntity<>(eventoService.findByDescricao(descricao, pageable), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(eventoService.findAll(), HttpStatus.OK);
+            }
         }
-        return new ResponseEntity<Iterable<Evento>>(eventoService.findByLevel(level, pageable), HttpStatus.OK);
     }
-
-
 }

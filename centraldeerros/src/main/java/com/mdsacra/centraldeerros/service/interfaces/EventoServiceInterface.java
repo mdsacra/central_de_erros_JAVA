@@ -12,6 +12,8 @@ public interface EventoServiceInterface {
 
     Optional<Evento> findById(Integer id);
 
+    List<Evento> findAll();
+
     List<Evento> findByLevel(Level level, Pageable pageable);
 
     List<Evento> findByOrigem(String origem, Pageable pageable);
