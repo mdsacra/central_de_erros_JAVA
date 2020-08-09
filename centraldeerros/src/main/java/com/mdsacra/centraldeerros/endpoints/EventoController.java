@@ -5,13 +5,13 @@ import com.mdsacra.centraldeerros.entity.Evento;
 import com.mdsacra.centraldeerros.level.Level;
 import com.mdsacra.centraldeerros.service.implement.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/eventos")
@@ -33,9 +33,13 @@ public class EventoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Evento>> findEventos(@RequestParam(name = "level", required = false) Level level){
+    public ResponseEntity<Iterable<Evento>> findEventoByLevel(@RequestParam(name = "level") Level level, Pageable pageable) {
 
-        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
+        if (eventoService.findByLevel(level, pageable).isEmpty()) {
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<Iterable<Evento>>(eventoService.findByLevel(level, pageable), HttpStatus.OK);
     }
+
 
 }

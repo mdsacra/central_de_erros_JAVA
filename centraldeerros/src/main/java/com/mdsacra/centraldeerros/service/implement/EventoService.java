@@ -5,6 +5,7 @@ import com.mdsacra.centraldeerros.level.Level;
 import com.mdsacra.centraldeerros.repository.EventoRepository;
 import com.mdsacra.centraldeerros.service.interfaces.EventoServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,27 +28,27 @@ public class EventoService implements EventoServiceInterface {
     }
 
     @Override
-    public List<Evento> findByLevel(Level level) {
-        return eventoRepository.findByLevel(level);
+    public List<Evento> findByLevel(Level level, Pageable pageable) {
+        return eventoRepository.findByLevel(level, pageable).getContent();
     }
 
     @Override
-    public List<Evento> findByOrigem(String origem) {
-        return eventoRepository.findByOrigem(origem);
+    public List<Evento> findByOrigem(String origem, Pageable pageable) {
+        return eventoRepository.findByOrigem(origem, pageable).getContent();
     }
 
     @Override
-    public List<Evento> findByLog(String log) {
-        return eventoRepository.findByLog(log);
+    public List<Evento> findByLog(String log, Pageable pageable) {
+        return eventoRepository.findByLog(log, pageable).getContent();
     }
 
     @Override
-    public List<Evento> findByDescricao(String descricao) {
-        return eventoRepository.findByDescricao(descricao);
+    public List<Evento> findByDescricao(String descricao, Pageable pageable) {
+        return eventoRepository.findByDescricaoContaining(descricao, pageable).getContent();
     }
 
     @Override
-    public List<Evento> findByData(String data) {
-        return eventoRepository.findByData(data);
+    public List<Evento> findByData(String data, Pageable pageable) {
+        return eventoRepository.findByData(data, pageable).getContent();
     }
 }
