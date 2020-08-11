@@ -7,12 +7,10 @@ import com.mdsacra.centraldeerros.service.interfaces.EventoServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 @Service
 public class EventoService implements EventoServiceInterface {
@@ -60,4 +58,5 @@ public class EventoService implements EventoServiceInterface {
     public List<Evento> findByData(String data, Pageable pageable) {
         return eventoRepository.findByData(data, pageable);
     }
+
 }
