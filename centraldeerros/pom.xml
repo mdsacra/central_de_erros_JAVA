@@ -12,7 +12,7 @@
 	<artifactId>centraldeerros</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>centraldeerros</name>
-	<description>API REST para registro de erros de uma aplicação</description>
+	<description>API REST para registro de erros de um sistema</description>
 
 	<properties>
 		<java.version>1.8</java.version>

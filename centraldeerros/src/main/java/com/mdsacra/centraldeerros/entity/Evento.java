@@ -33,8 +33,7 @@ public class Evento {
     String descricao;
 
     @Column
-    @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy", timezone = "GMT-3")
     Date data;
 
     @Column

@@ -15,8 +15,6 @@ public interface EventoRepository extends PagingAndSortingRepository<Evento, Int
 
     List<Evento> findByOrigem(String origem, Pageable pageable);
 
-    List<Evento> findByLog(String log, Pageable pageable);
-
     List<Evento> findByDescricaoContaining(String descricao, Pageable pageable);
 
     List<Evento> findByData(String data, Pageable pageable);

@@ -7,7 +7,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -25,6 +26,8 @@ public class Usuario {
 
     @CreatedDate
     @Column
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    LocalDateTime dataCadastro;
+    @JsonFormat(pattern = "dd-MM-yyyy", timezone = "GMT-3")
+    Date dataCadastro;
+
+
 }

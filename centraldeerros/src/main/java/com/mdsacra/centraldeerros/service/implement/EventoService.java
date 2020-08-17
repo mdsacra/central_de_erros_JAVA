@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -42,11 +43,6 @@ public class EventoService implements EventoServiceInterface {
     @Override
     public List<Evento> findByOrigem(String origem, Pageable pageable) {
         return eventoRepository.findByOrigem(origem, pageable);
-    }
-
-    @Override
-    public List<Evento> findByLog(String log, Pageable pageable) {
-        return eventoRepository.findByLog(log, pageable);
     }
 
     @Override

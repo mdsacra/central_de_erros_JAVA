@@ -6,6 +6,7 @@ import com.mdsacra.centraldeerros.entitydto.EventoDTO;
 import com.mdsacra.centraldeerros.entitymapper.EventoMapper;
 import com.mdsacra.centraldeerros.level.Level;
 import com.mdsacra.centraldeerros.service.implement.EventoService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +44,8 @@ public class EventoController {
     public ResponseEntity<List<EventoDTO>> findEventos(@RequestParam(name = "page", required = false) Pageable pageable,
                                                        @RequestParam(name = "level", required = false) Level level,
                                                        @RequestParam(name = "origem", required = false) String origem,
-                                                       @RequestParam(name = "descricao", required = false) String descricao) {
+                                                       @RequestParam(name = "descricao", required = false) String descricao,
+                                                       @RequestParam(name = "data", required = false) String data) {
 
 
         if (eventoService.findAll().isEmpty()) {
@@ -54,6 +57,8 @@ public class EventoController {
                 return new ResponseEntity<>(this.eventoDtoMapper.map(eventoService.findByOrigem(origem, pageable)), HttpStatus.OK);
             } else if (descricao != null) {
                 return new ResponseEntity<>(this.eventoDtoMapper.map(eventoService.findByDescricao(descricao, pageable)), HttpStatus.OK);
+            } else if (data != null) {
+                return new ResponseEntity<>(this.eventoDtoMapper.map(eventoService.findByData(data, pageable)), HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(this.eventoDtoMapper.map(eventoService.findAll()), HttpStatus.OK);
             }
