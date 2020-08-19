@@ -1,0 +1,1 @@
+INSERT INTO usuario VALUES (1, 'mdsacra', '123');
