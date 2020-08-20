@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -17,7 +18,7 @@ public interface EventoRepository extends PagingAndSortingRepository<Evento, Int
 
     List<Evento> findByDescricaoContaining(String descricao, Pageable pageable);
 
-    List<Evento> findByData(String data, Pageable pageable);
+    List<Evento> findAllByDataBetween(LocalDate dataInicial, LocalDate dataFinal, Pageable pageable);
 
 
 

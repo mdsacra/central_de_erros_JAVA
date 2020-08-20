@@ -5,9 +5,12 @@ import com.mdsacra.centraldeerros.level.Level;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -33,8 +36,8 @@ public class Evento {
     String descricao;
 
     @Column
-    @JsonFormat(pattern = "dd-MM-yyyy", timezone = "GMT-3")
-    Date data;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    LocalDate data;
 
     @Column
     Integer quantidade;

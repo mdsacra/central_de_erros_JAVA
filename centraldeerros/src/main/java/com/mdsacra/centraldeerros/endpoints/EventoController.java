@@ -9,11 +9,14 @@ import com.mdsacra.centraldeerros.service.implement.EventoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +47,8 @@ public class EventoController {
                                                        @RequestParam(name = "level", required = false) Level level,
                                                        @RequestParam(name = "origem", required = false) String origem,
                                                        @RequestParam(name = "descricao", required = false) String descricao,
-                                                       @RequestParam(name = "data", required = false) String data) {
+                                                       @RequestParam(name = "datainicial", required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate dataInicial,
+                                                       @RequestParam(name = "datafinal", required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate dataFinal) {
 
 
         if (eventoService.findAll().isEmpty()) {
@@ -56,8 +60,8 @@ public class EventoController {
                 return new ResponseEntity<>(this.eventoDtoMapper.map(eventoService.findByOrigem(origem, pageable)), HttpStatus.OK);
             } else if (descricao != null) {
                 return new ResponseEntity<>(this.eventoDtoMapper.map(eventoService.findByDescricao(descricao, pageable)), HttpStatus.OK);
-            } else if (data != null) {
-                return new ResponseEntity<>(this.eventoDtoMapper.map(eventoService.findByData(data, pageable)), HttpStatus.OK);
+            } else if (dataInicial != null || dataFinal != null) {
+                return new ResponseEntity<>(this.eventoDtoMapper.map(eventoService.findByData(dataInicial, dataFinal, pageable)), HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(this.eventoDtoMapper.map(eventoService.findAll()), HttpStatus.OK);
             }

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -51,8 +52,8 @@ public class EventoService implements EventoServiceInterface {
     }
 
     @Override
-    public List<Evento> findByData(String data, Pageable pageable) {
-        return eventoRepository.findByData(data, pageable);
+    public List<Evento> findByData(LocalDate dataInicial, LocalDate dataFinal, Pageable pageable) {
+        return eventoRepository.findAllByDataBetween(dataInicial, dataFinal, pageable);
     }
 
 }
