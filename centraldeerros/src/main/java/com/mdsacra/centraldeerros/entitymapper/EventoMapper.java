@@ -5,6 +5,8 @@ import com.mdsacra.centraldeerros.entitydto.EventoDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -19,5 +21,7 @@ public interface EventoMapper {
             @Mapping(source = "quantidade", target = "quantidade") })
     EventoDTO map(Evento evento);
 
-    List<EventoDTO> map(List<Evento> eventos);
+    default Page<EventoDTO> map(Page<Evento> eventos) {
+        return eventos.map(this::map);
+    }
 }

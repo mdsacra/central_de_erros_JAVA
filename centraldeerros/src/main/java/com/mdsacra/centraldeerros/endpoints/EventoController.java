@@ -8,6 +8,8 @@ import com.mdsacra.centraldeerros.level.Level;
 import com.mdsacra.centraldeerros.service.implement.EventoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -43,7 +45,7 @@ public class EventoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<EventoDTO>> findEventos(@RequestParam(name = "page", required = false) Pageable pageable,
+    public ResponseEntity<Page<EventoDTO>> findEventos(Pageable pageable,
                                                        @RequestParam(name = "level", required = false) Level level,
                                                        @RequestParam(name = "origem", required = false) String origem,
                                                        @RequestParam(name = "descricao", required = false) String descricao,
@@ -51,8 +53,8 @@ public class EventoController {
                                                        @RequestParam(name = "datafinal", required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate dataFinal) {
 
 
-        if (eventoService.findAll().isEmpty()) {
-            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NO_CONTENT);
+        if (eventoService.findAll(pageable).isEmpty()) {
+            return new ResponseEntity<>(new PageImpl<>(new ArrayList<>()), HttpStatus.NO_CONTENT);
         } else {
             if (level != null) {
                 return new ResponseEntity<>(this.eventoDtoMapper.map(eventoService.findByLevel(level, pageable)), HttpStatus.OK);
@@ -63,7 +65,7 @@ public class EventoController {
             } else if (dataInicial != null || dataFinal != null) {
                 return new ResponseEntity<>(this.eventoDtoMapper.map(eventoService.findByData(dataInicial, dataFinal, pageable)), HttpStatus.OK);
             } else {
-                return new ResponseEntity<>(this.eventoDtoMapper.map(eventoService.findAll()), HttpStatus.OK);
+                return new ResponseEntity<>(this.eventoDtoMapper.map(eventoService.findAll(pageable)), HttpStatus.OK);
             }
         }
     }
